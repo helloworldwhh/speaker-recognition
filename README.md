@@ -1,0 +1,2 @@
+# speaker-recognition
+MFCC+GMM
