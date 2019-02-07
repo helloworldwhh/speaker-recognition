@@ -1,25 +1,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                   
-%±¾´úÂëÊÊÓÃÓÚµ¥ÈËµÄËµ»°ÈËÈ·ÈÏ                                                       
+%æœ¬ä»£ç é€‚ç”¨äºå•äººçš„è¯´è¯äººç¡®è®¤                                                       
 clc;                                                                                
 clear all;                                                                          
 close all;                                                                          
-MFCC_size=12;%mfccµÄÎ¬Êı                                                            
-GMMM_component=16;%GMM component ¸öÊı                                                                                                                      
-mu_model=zeros(MFCC_size,GMMM_component);%¸ßË¹Ä£ĞÍ ·ÖÁ¿ ¾ùÖµ                        
-sigma_model=zeros(MFCC_size,GMMM_component);%¸ßË¹Ä£ĞÍ ·ÖÁ¿ ·½²î                     
-weight_model=zeros(GMMM_component);%¸ßË¹Ä£ĞÍ ·ÖÁ¿ È¨ÖØ                              
+MFCC_size=12;%mfccçš„ç»´æ•°                                                            
+GMMM_component=16;%GMM component ä¸ªæ•°                                                                                                                      
+mu_model=zeros(MFCC_size,GMMM_component);%é«˜æ–¯æ¨¡å‹ åˆ†é‡ å‡å€¼                        
+sigma_model=zeros(MFCC_size,GMMM_component);%é«˜æ–¯æ¨¡å‹ åˆ†é‡ æ–¹å·®                     
+weight_model=zeros(GMMM_component);%é«˜æ–¯æ¨¡å‹ åˆ†é‡ æƒé‡                              
 file=['N';'F';'S'];                                                                                
-train_file_path='E:\Desktop\Êı×ÖÊÓÒôÆµ´¦Àí\ÒôÆµ\3160102507-Íõº­-Â¼Òô\3160102507-W1\';%Ä£ĞÍÑµÁ·ÎÄ¼şÂ·¾¶                                 
-num_train=6;%Ä¿±êËµ»°ÈËÄ£ĞÍÑµÁ·ÎÄ¼şµÄ¸öÊı                                           
-test_file_path='E:\Desktop\Êı×ÖÊÓÒôÆµ´¦Àí\ÒôÆµ\3160102507-Íõº­-Â¼Òô\3160102507-W15\';%²âÊÔÎÄ¼şÂ·¾¶
+train_file_path='E:\Desktop\æ•°å­—è§†éŸ³é¢‘å¤„ç†\éŸ³é¢‘\316010***-å½•éŸ³\316010****-W1\';%æ¨¡å‹è®­ç»ƒæ–‡ä»¶è·¯å¾„                                 
+num_train=6;%ç›®æ ‡è¯´è¯äººæ¨¡å‹è®­ç»ƒæ–‡ä»¶çš„ä¸ªæ•°                                           
+test_file_path='E:\Desktop\æ•°å­—è§†éŸ³é¢‘å¤„ç†\éŸ³é¢‘\316010***-å½•éŸ³\316010****-W15\';%æµ‹è¯•æ–‡ä»¶è·¯å¾„
 
-num_test=2;%²âÊÔÇé¿öÏÂÀÊ¶ÁµÄ´ÎÊı                                                    
-num_uttenance=18;%²âÊÔÇé¿öÏÂÃ¿´ÎÀÊ¶ÁµÄ¾ä×ÓµÄ×ÜÊı                                    
+num_test=2;%æµ‹è¯•æƒ…å†µä¸‹æœ—è¯»çš„æ¬¡æ•°                                                    
+num_uttenance=18;%æµ‹è¯•æƒ…å†µä¸‹æ¯æ¬¡æœ—è¯»çš„å¥å­çš„æ€»æ•°                                    
 all_train_feature=[];                                                               
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%                                                    
 %train model                                                                        
-%Ê¹ÓÃ1_1¡«1_6ÑµÁ·                                                                   
+%ä½¿ç”¨1_1ï½1_6è®­ç»ƒ                                                                   
 for i=1:num_train                                                                   
     train_file=[train_file_path 'N' num2str(i) '.wav'];    
     [wav_data ,fs]=audioread(train_file);                                             
@@ -38,7 +38,7 @@ for i=1:3
         test_feature=melcepst(wav_data ,fs);                                        
         [lYM, lY] = lmultigauss(test_feature', mu_model, sigma_model, weight_model);
         score((i-1)*6+j) = mean(lY);                                                        
-        fprintf('Test£º%s_%d  score:%f\n',file(i),j,score((i-1)*6+j)); 
+        fprintf('Testï¼š%s_%d  score:%f\n',file(i),j,score((i-1)*6+j)); 
     end
 end                                                                             
                                                                              
